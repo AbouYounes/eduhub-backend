@@ -1,0 +1,30 @@
+package de.karim.eduhub.model;
+
+
+import jakarta.persistence.*;
+import lombok.*;
+
+/**
+ * Entity representing a Course in the EduHub platform.
+ */
+@Entity
+@Table(name = "courses")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Course {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String title;
+
+    private String description;
+
+    @Column(nullable = false)
+    private Integer durationHours;
+}
