@@ -2,6 +2,7 @@ package de.karim.eduhub.controller;
 
 import de.karim.eduhub.model.Course;
 import de.karim.eduhub.service.CourseService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class CourseController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) //Returns HTTP 201 instead of 200
-    public Course createCourse(@RequestBody Course course) {
+    public Course createCourse(@Valid @RequestBody Course course) {
         return courseService.createCourse(course);
     }
 }
