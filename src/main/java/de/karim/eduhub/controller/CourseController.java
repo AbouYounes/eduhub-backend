@@ -1,5 +1,6 @@
 package de.karim.eduhub.controller;
 
+import de.karim.eduhub.dto.CourseDTO;
 import de.karim.eduhub.model.Course;
 import de.karim.eduhub.service.CourseService;
 import jakarta.validation.Valid;
@@ -25,7 +26,7 @@ public class CourseController {
      * URL: http://localhost:8080/api/v1/courses
      */
     @GetMapping
-    public List<Course> getAllCourses() {
+    public List<CourseDTO> getAllCourses() {
         return courseService.getAllCourses();
     }
 
