@@ -1,5 +1,6 @@
 package de.karim.eduhub.controller;
 
+import de.karim.eduhub.dto.StudentDTO;
 import de.karim.eduhub.model.Student;
 import de.karim.eduhub.service.StudentService;
 import jakarta.validation.Valid;
@@ -17,7 +18,7 @@ public class StudentController {
     private final StudentService studentService;
 
     @GetMapping
-    public List<Student> getAll() {
+    public List<StudentDTO> getAll() {
         return studentService.getAllStudent();
     }
 

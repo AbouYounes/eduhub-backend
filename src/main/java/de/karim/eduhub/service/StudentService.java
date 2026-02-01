@@ -1,5 +1,6 @@
 package de.karim.eduhub.service;
 
+import de.karim.eduhub.dto.StudentDTO;
 import de.karim.eduhub.model.Course;
 import de.karim.eduhub.model.Student;
 import de.karim.eduhub.repository.CourseRepository;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +19,22 @@ public class StudentService {
 
     private final CourseRepository courseRepository;
 
-    public List<Student> getAllStudent() {
-        return studentRepository.findAll();
+    public List<StudentDTO> getAllStudent() {
+        return studentRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    private StudentDTO convertToDTO(Student student) {
+        return StudentDTO.builder()
+                .id(student.getId())
+                .firstname(student.getFirstname())
+                .lastname(student.getLastname())
+                .email(student.getEmail())
+                .enrolledCourseTitles(student.getEnrolledCourses().stream()
+                        .map(Course::getTitle)
+                        .collect(Collectors.toList()))
+                .build();
     }
 
     public Student registerStudent(Student student) {
