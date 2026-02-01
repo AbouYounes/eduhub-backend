@@ -26,4 +26,11 @@ public class StudentController {
     public Student register(@Valid @RequestBody Student student) {
         return studentService.registerStudent(student);
     }
+
+    @PutMapping("/{studentId}/courses/{courseId}")
+    public void enrollStudentToCourse(
+            @PathVariable long studentId,
+            @PathVariable long courseId) {
+                studentService.enrollStudentInCourse(studentId, courseId);
+    }
 }
