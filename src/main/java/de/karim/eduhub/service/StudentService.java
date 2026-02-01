@@ -2,6 +2,7 @@ package de.karim.eduhub.service;
 
 import de.karim.eduhub.dto.StudentDTO;
 import de.karim.eduhub.exception.AlreadyExistsException;
+import de.karim.eduhub.exception.ResourceNotFoundException;
 import de.karim.eduhub.model.Course;
 import de.karim.eduhub.model.Student;
 import de.karim.eduhub.repository.CourseRepository;
@@ -49,9 +50,9 @@ public class StudentService {
 
     public void enrollStudentInCourse(long studentId, Long courseId) {
         Student student = studentRepository.findById(studentId)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Student with ID " + studentId + " not found"));
         Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new RuntimeException("Course not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Course with ID " + courseId + " not found"));
 
         student.getEnrolledCourses().add(course);
         studentRepository.save(student);
