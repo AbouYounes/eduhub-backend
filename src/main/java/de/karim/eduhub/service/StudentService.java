@@ -1,6 +1,7 @@
 package de.karim.eduhub.service;
 
 import de.karim.eduhub.dto.StudentDTO;
+import de.karim.eduhub.exception.AlreadyExistsException;
 import de.karim.eduhub.model.Course;
 import de.karim.eduhub.model.Student;
 import de.karim.eduhub.repository.CourseRepository;
@@ -37,13 +38,13 @@ public class StudentService {
                 .build();
     }
 
-    public Student registerStudent(Student student) {
+    public StudentDTO registerStudent(Student student) {
         //Business Logic: Check if email is already taken
         if (studentRepository.findByEmail(student.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already exists!");
-            //Later i will handle this with a professional Exception Handler
+            throw new AlreadyExistsException("A student with email " + student.getEmail() + " already exist.");
         }
-        return studentRepository.save(student);
+        Student savedStudent = studentRepository.save(student);
+        return convertToDTO(savedStudent);
     }
 
     public void enrollStudentInCourse(long studentId, Long courseId) {
