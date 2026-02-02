@@ -3,6 +3,7 @@ package de.karim.eduhub.service;
 import de.karim.eduhub.dto.StudentDTO;
 import de.karim.eduhub.exception.AlreadyExistsException;
 import de.karim.eduhub.exception.ResourceNotFoundException;
+import de.karim.eduhub.mapper.StudentMapper;
 import de.karim.eduhub.model.Course;
 import de.karim.eduhub.model.Student;
 import de.karim.eduhub.repository.CourseRepository;
@@ -18,12 +19,13 @@ import java.util.stream.Collectors;
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final StudentMapper studentMapper;
 
     private final CourseRepository courseRepository;
 
     public List<StudentDTO> getAllStudent() {
         return studentRepository.findAll().stream()
-                .map(this::convertToDTO)
+                .map(studentMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
