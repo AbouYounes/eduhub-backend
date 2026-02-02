@@ -36,7 +36,7 @@ public class CourseController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED) //Returns HTTP 201 instead of 200
-    public Course createCourse(@Valid @RequestBody Course course) {
+    public CourseDTO createCourse(@Valid @RequestBody Course course) {
         return courseService.createCourse(course);
     }
 }
