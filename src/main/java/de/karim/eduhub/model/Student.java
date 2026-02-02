@@ -32,6 +32,7 @@ public class Student {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(
             name = "student_course",

@@ -47,7 +47,7 @@ public class StudentService {
             throw new AlreadyExistsException("A student with email " + student.getEmail() + " already exist.");
         }
         Student savedStudent = studentRepository.save(student);
-        return convertToDTO(savedStudent);
+        return studentMapper.toDTO(savedStudent);
     }
 
     public void enrollStudentInCourse(long studentId, Long courseId) {
