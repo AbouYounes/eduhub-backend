@@ -69,7 +69,7 @@ class StudentServiceTest {
             studentService.registerStudent(student);
         });
 
-        // Sicherstellen, dass save() NIEMALS aufgerufen wurde
+        // Ensure that save() has NEVER been called
         verify(studentRepository, never()).save(any(Student.class));
     }
 }
